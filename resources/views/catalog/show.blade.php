@@ -23,7 +23,7 @@
                 @if(!empty($book->cover_image))
                     <img src="{{ $book->cover_image }}" alt="Cover Asset" class="w-full h-full object-cover">
                 @else
-                    <div class="w-full h-full flex items-center justify-center text-3xl text-slate-600">📖</div>
+                    <div class="w-full h-full flex items-center justify-center text-3xl text-slate-600">No-img</div>
                 @endif
             </div>
         </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use App\Models\Book;
 use Illuminate\View\View;
 
@@ -42,45 +43,57 @@ class BookCatalogController extends Controller {
     }
 
     public function borrow(Request $request) {
-        $request->validate(['book_id' => 'required|exists:books,id']);
+    $request->validate(['book_id' => 'required|exists:books,id']);
 
-        try {
-            DB::transaction(function () use ($request) {
-                $book = DB::table('books')->where('id', $request->book_id)->first();
+    try {
+        $successMessage = DB::transaction(function () use ($request) {
 
-                if (!$book) {
-                    throw new \Exception('Book not found.');
-                }
+            $book = DB::table('books')->where('id', $request->book_id)->lockForUpdate()->first();
 
-                if ($book->available_stock <= 0) {
-                    throw new \Exception('This book is currently out of stock.');
-                }
+            if (!$book) {
+                throw new \Exception('Book not found in records.');
+            }
 
-            DB::table('borrow_records')->insert([
-                'user_id'     => Auth::id(),
-                'book_id'     => $request->book_id,
-                'due_date'    => now()->addDays(7),
-                'status'      => 'booked',
-                // Instead of null, if the column is TIMESTAMP, try passing a real null or 
-                // removing the key if the DB has a default of NULL.
-                'returned_at' => null, 
-                'created_at'  => now(),
-                'updated_at'  => now(),
+            if ($book->available_stock <= 0) {
+                throw new \Exception('This book is currently out of stock.');
+            }
+
+            \App\Models\BorrowRecord::create([
+                'user_id'       => Auth::id(),
+                'book_id'       => $request->book_id,
+                'status'        => 'booked',
+                'borrowed_date' => now(),
+                'due_date'      => now()->addDays(7),
+                'return_date'   => null, 
             ]);
 
-                DB::table('books')->where('id', $request->book_id)->decrement('available_stock');
-            });
+            DB::table('books')->where('id', $request->book_id)->decrement('available_stock');
 
-            return redirect()->back()->with('success', 'Request submitted! Wait for librarian approval.');
-            
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', $e->getMessage());
-        }
+            return 'Request submitted! Wait for librarian approval.';
+        });
+
+        return redirect()->back()->with('success', $successMessage);
+        
+    }catch (\Exception $e) {
+        // Using the logger() helper instead of the Log facade
+        logger()->error('Borrowing Transaction Aborted: ' . $e->getMessage());
+        
+        return redirect()->back()->with('error', $e->getMessage());
     }
+}
 
     public function confirmBorrow($id) {
-        DB::table('borrow_records')->where('id', $id)->update(['status' => 'active']);
-        return redirect()->back()->with('success', 'Book request approved and set to active.');
+        DB::table('borrow_records')
+            ->where('id', $id)
+            ->update([
+                'status' => 'active',
+                'updated_at' => now(),
+            ]);
+
+        return back()->with(
+            'success',
+            'Book request approved and set to active.'
+        );
     }
 
 

@@ -36,7 +36,7 @@
                     <img src="{{ $featuredBook->cover_image }}" alt="Cover" class="w-full h-full object-cover rounded-lg shadow border border-slate-800">
                 @else
                     <div class="w-full h-full bg-slate-900 rounded-lg flex items-center justify-center font-bold text-xl text-slate-500 border border-slate-800">
-                        📖
+                        no-img
                     </div>
                 @endif
             </div>
@@ -63,7 +63,7 @@
                                 <img src="{{ $book->cover_image }}" alt="Cover" class="w-full h-full object-cover">
                             @else
                                 <div class="w-full h-full flex items-center justify-center text-xl text-slate-600">
-                                    📘
+                                    no-img
                                 </div>
                             @endif
                             

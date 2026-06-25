@@ -33,7 +33,7 @@
                         @if(!empty($book->cover_image))
                             <img src="{{ $book->cover_image }}" alt="Cover" class="w-full h-full object-cover">
                         @else
-                            <div class="w-full h-full flex items-center justify-center text-xl text-slate-600">📘</div>
+                            <div class="w-full h-full flex items-center justify-center text-xl text-slate-600">no-img</div>
                         @endif
                         
                         <span class="absolute top-1.5 left-1.5 text-[9px] font-bold tracking-wide px-1.5 py-0.5 rounded-sm border {{ $book->available_stock > 0 ? 'bg-emerald-950/80 text-emerald-400 border-emerald-900/50' : 'bg-rose-950/80 text-rose-400 border-rose-900/50' }}">

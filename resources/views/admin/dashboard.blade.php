@@ -45,7 +45,7 @@
                                 @if(!empty($req->cover_image))
                                     <img src="{{ $req->cover_image }}" alt="Cover" class="w-full h-full object-cover" onerror="this.src=''; this.parentElement.innerHTML='📘';">
                                 @else
-                                    <span class="text-xl text-slate-400">📘</span>
+                                    <span class="text-xl text-slate-400">no-img</span>
                                 @endif
                             </div>
                             <div class="space-y-0.5">
@@ -53,11 +53,11 @@
                                 <p class="text-xs text-slate-400 font-medium">by {{ $req->author }} <span class="mx-1 text-slate-300">•</span> {{ $req->category }}</p>
                                 <div class="flex items-center space-x-3 pt-1.5">
                                     <span class="text-[10px] bg-white text-blue-600 font-semibold px-2 py-0.5 rounded border border-slate-200/60 shadow-2xs">{{ $req->user_name }}</span>
-                                    <span class="text-[10px] text-slate-400">📅 {{ $req->date }}</span>
+                                    <span class="text-[10px] text-slate-400"><i class="fa-solid fa-calendar"></i>{{ $req->date }}</span>
                                 </div>
                             </div>
                         </div>
-                        <button class="text-slate-400 hover:text-slate-800 bg-white border border-slate-200/60 p-2 rounded shadow-2xs transition">👁️</button>
+                        <button class="text-slate-400 hover:text-slate-800 bg-white border border-slate-200/60 p-2 rounded shadow-2xs transition"><i class="fa-solid fa-eye"></i></button>
                     </div>
                 @empty
                     <p class="text-xs text-slate-400 italic py-4">No active requests found.</p>
@@ -83,13 +83,13 @@
                             @if(!empty($book->cover_image))
                                 <img src="{{ $book->cover_image }}" alt="Book Cover" class="w-full h-full object-cover" onerror="this.src=''; this.parentElement.innerHTML='📖';">
                             @else
-                                <span class="text-xl text-slate-400">📖</span>
+                                <span class="text-xl text-slate-400">no-img</span>
                             @endif
                         </div>
                         <div class="space-y-0.5 min-w-0 flex-1">
                             <h4 class="text-sm font-bold text-slate-900 truncate leading-tight">{{ $book->title }}</h4>
                             <p class="text-xs text-slate-400 font-medium truncate">by {{ $book->author }} <span class="mx-1 text-slate-300">•</span> {{ $book->category }}</p>
-                            <p class="text-[10px] text-slate-400 pt-1">📅 Added Recently</p>
+                            <p class="text-[10px] text-slate-400 pt-1"><i class="fa-solid fa-calendar"></i> Added Recently</p>
                         </div>
                     </div>
                 @empty

@@ -8,30 +8,40 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <style>body { font-family: 'Inter', sans-serif; }</style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body class="bg-slate-50 text-slate-800 min-h-screen flex" x-data="{ openBookModal: false }">
 
     <aside class="w-72 bg-white border-r border-slate-200 flex flex-col justify-between fixed h-full z-40">
         <div class="p-6 space-y-10">
             <div class="flex items-center space-x-3 px-2 py-1">
-                <span class="text-2xl">📚</span>
+                <span class="text-2xl"><i class="fa-solid fa-book-open"></i></span>
                 <span class="text-lg font-bold tracking-tight text-slate-900">PUSLOK</span>
             </div>
             <nav class="space-y-3">
                 <a href="{{ route('admin.dashboard') }}" class="flex items-center space-x-4 px-4 py-3.5 text-[13px] font-semibold rounded-md bg-slate-100 text-slate-900 border border-slate-200/60 transition">
-                    <span class="text-base">🏠</span> <span>Home</span>
+                    <i class="fa-solid fa-house text-base w-5"></i>
+                    <span>Home</span>
                 </a>
+
                 <a href="users" class="flex items-center space-x-4 px-4 py-3.5 text-[13px] font-medium text-slate-500 hover:text-slate-900 hover:bg-slate-50 rounded-md transition">
-                    <span class="text-base">👥</span> <span>All Users</span>
+                    <i class="fa-solid fa-users text-base w-5"></i>
+                    <span>All Users</span>
                 </a>
+
                 <a href="books" class="flex items-center space-x-4 px-4 py-3.5 text-[13px] font-medium text-slate-500 hover:text-slate-900 hover:bg-slate-50 rounded-md transition">
-                    <span class="text-base">📖</span> <span>All Books</span>
+                    <i class="fa-solid fa-book text-base w-5"></i>
+                    <span>All Books</span>
                 </a>
+
                 <a href="#" class="flex items-center space-x-4 px-4 py-3.5 text-[13px] font-medium text-slate-500 hover:text-slate-900 hover:bg-slate-50 rounded-md transition">
-                    <span class="text-base">📥</span> <span>Borrow Records</span>
+                    <i class="fa-solid fa-book-bookmark text-base w-5"></i>
+                    <span>Borrow Records</span>
                 </a>
+
                 <a href="requests" class="flex items-center space-x-4 px-4 py-3.5 text-[13px] font-medium text-slate-500 hover:text-slate-900 hover:bg-slate-50 rounded-md transition">
-                    <span class="text-base">💳</span> <span>Account Requests</span>
+                    <i class="fa-solid fa-user-clock text-base w-5"></i>
+                    <span>Account Requests</span>
                 </a>
             </nav>
         </div>

@@ -53,7 +53,7 @@
                                     @if(!empty($book->cover_image))
                                         <img src="{{ $book->cover_image }}" alt="Thumb" class="w-full h-full object-cover" onerror="this.src=''; this.parentElement.innerHTML='📖';">
                                     @else
-                                        <span>📖</span>
+                                        <span><i class="fa-solid fa-book"></i></span>
                                     @endif
                                 </div>
                                 <span class="font-bold text-slate-900">{{ $book->title }}</span>
@@ -82,10 +82,10 @@
                                         data-summary="{{ $book->summary ?? '' }}"
                                         data-desc="{{ $book->description ?? '' }}"
                                         class="text-teal-500 hover:text-teal-600 text-sm transition">
-                                        ✏️
+                                        <i class="fa-solid fa-pencil"></i>
                                     </button>
                                     <button type="button" @click="triggerDeleteConfirmation('{{ route('admin.books.delete', $book->id) }}')" class="text-rose-400 hover:text-rose-500 text-sm transition">
-                                        🗑️
+                                        <i class="fa-solid fa-trash"></i>
                                     </button>
                                 </div>
                             </td>

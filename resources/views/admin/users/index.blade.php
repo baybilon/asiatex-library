@@ -14,7 +14,7 @@
             this.userData.name = el.getAttribute('data-name');
             this.userData.email = el.getAttribute('data-email');
             this.userData.role = el.getAttribute('data-role');
-            this.userData.university_id = el.getAttribute('data-university-id'); // <-- Add this line
+            this.userData.university_id = el.getAttribute('data-university-id');
             this.editActionUrl = el.getAttribute('data-action');
             this.openEditModal = true;
         },
@@ -70,7 +70,7 @@
                             </td>
                             <td class="py-4 px-4">
                                 <div class="flex items-center justify-center space-x-3.5">
-                                    {{-- Only show edit/delete if this is not the current user --}}
+                                    
                                         @if($user->id !== auth()->id())
                                             <button 
                                                 type="button"
@@ -82,13 +82,13 @@
                                                 data-university-id="{{ $user->university_id ?? '' }}"
                                                 data-action="{{ route('admin.users.update', $user->id) }}"
                                                 class="text-teal-500 hover:text-teal-600 text-sm transition">
-                                                ✏️
+                                                <i class="fa-solid fa-pencil"></i>
                                             </button>
                                             <button type="button" @click="triggerDeleteConfirmation('{{ route('admin.users.delete', $user->id) }}')" class="text-rose-400 hover:text-rose-500 text-sm transition">
-                                                🗑️
+                                                <i class="fa-solid fa-trash"></i>
                                             </button>
                                         @else
-                                            {{-- Optional: Show a badge or text indicating it's the current user --}}
+                                            
                                             <span class="text-[10px] text-slate-400 italic">Current Session</span>
                                         @endif
                                 </div>
