@@ -21,3 +21,16 @@ npm install
 composer run dev
 ```
 
+## Dummy account
+
+Admin
+```bash
+email : admin@library.com
+password: 123
+```
+
+User
+```bash
+email : student@library.com
+password: 123
+```
