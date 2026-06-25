@@ -1,0 +1,43 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class BorrowRecord extends Model
+{
+    use HasFactory;
+
+    /**
+     * The attributes that are mass assignable.
+     */
+    protected $fillable = [
+        'user_id',
+        'book_id',
+        'status',
+        'borrowed_date',
+        'due_date',
+        'return_date',
+        'receipt_path',
+    ];
+
+    protected function casts(): array
+    {
+        return [
+            'borrowed_date' => 'datetime',
+            'due_date' => 'datetime',
+            'return_date' => 'datetime',
+        ];
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function book()
+    {
+        return $this->belongsTo(Book::class);
+    }
+}
